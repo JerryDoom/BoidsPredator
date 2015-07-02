@@ -61,7 +61,7 @@ public class PredatorList extends CreatureList {
 				predator.decStamina(1);
 				Boid boid = predator.calcSpeedTarget();
 				if (boid!= null) {
-					boids.remove(boid);
+					//boids.remove(boid);
 					
 			
 					predator.setFollow(null);

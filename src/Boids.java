@@ -31,7 +31,7 @@ public class Boids extends Applet {
 
     static int numOfBoids = 20;
     
-    static int numOfPredators = 1;
+    static int numOfPredators = 3;
 
     static int predatorPositionChange = 80;
 
@@ -52,7 +52,7 @@ public class Boids extends Applet {
 	static double maxBSpeed = 4;
 	static double maxPSpeed = 2.5;
 
-	static int delay = 0;	
+	static int delay = 40;	
 	
     public void init() {
         setBackground(Color.white);
