@@ -135,8 +135,6 @@ public class Boids extends Applet {
         });
         upperPanel.add(posSpinner);
         
-        
-        
         JLabel speedLabel = new JLabel("Av. speed");
         upperPanel.add(speedLabel);
         JSpinner speedSpinner = new JSpinner(new SpinnerNumberModel(
