@@ -74,7 +74,7 @@ public class PredatorList extends CreatureList {
 			        predator.incStamina(1);
 			    }
 				Boid boid = findTarget(boids, predator);
-				if (boid != null && predator.getStamina() > 99) {
+				if (boid != null && !boid.isCaptured() && predator.getStamina() > 99) {
 					predator.setFollow(boid);
 					predator.setStamina(100);
 				} else {
