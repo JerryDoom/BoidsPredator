@@ -25,6 +25,14 @@ public class Boids extends Applet {
 
     static final int fieldHeight = 500;
 
+    static final int rectWidth = fieldWidth/8;
+
+    static final int rectHeight = fieldHeight/4;
+
+    static final int posRectWidth = 7*fieldWidth/8;
+
+    static final int posRectHeight = fieldHeight/4;
+
     static double speedChange = 92;
 
     static double positionChange = 80;
