@@ -15,6 +15,7 @@ public class Predator extends Boid {
 	public Predator() {
 		width = 10;
 		height = 10;
+		this.setCapturable(false);
 	}
 	
 	/**
@@ -31,7 +32,8 @@ public class Predator extends Boid {
 		this.setY(y);
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
-		this.color = red;
+		this.color = red;		
+		this.setCapturable(false);
 	}
 
 

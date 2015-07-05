@@ -7,6 +7,7 @@ public class Boid extends Creature {
 	public Boid() {
 		width = 5;
 		height = 5;
+		this.setCapturable(true);
 	}
 
 	public Boid(int x, int y, double xSpeed, double ySpeed, Color color) {
@@ -15,6 +16,7 @@ public class Boid extends Creature {
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
 		this.color = color;
+		this.setCapturable(true);
 	}
 
 	void draw(Graphics g) {

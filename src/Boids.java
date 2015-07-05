@@ -25,13 +25,21 @@ public class Boids extends Applet {
 
     static final int fieldHeight = 500;
 
+    static final int rectWidth = fieldWidth/8;
+
+    static final int rectHeight = fieldHeight/4;
+
+    static final int posRectWidth = 7*fieldWidth/8;
+
+    static final int posRectHeight = fieldHeight/4;
+
     static double speedChange = 92;
 
     static double positionChange = 80;
 
     static int numOfBoids = 20;
     
-    static int numOfPredators = 1;
+    static int numOfPredators = 3;
 
     static int predatorPositionChange = 80;
 
@@ -52,7 +60,7 @@ public class Boids extends Applet {
 	static double maxBSpeed = 4;
 	static double maxPSpeed = 2.5;
 
-	static int delay = 0;	
+	static int delay = 40;	
 	
     public void init() {
         setBackground(Color.white);
@@ -134,8 +142,6 @@ public class Boids extends Applet {
             }
         });
         upperPanel.add(posSpinner);
-        
-        
         
         JLabel speedLabel = new JLabel("Av. speed");
         upperPanel.add(speedLabel);

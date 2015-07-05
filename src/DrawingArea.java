@@ -18,16 +18,19 @@ public class DrawingArea extends Panel implements Runnable {
 		if (offGraphics == null) {
 			offImage = createImage(Boids.fieldWidth+1, Boids.fieldHeight+1);
 			offGraphics = offImage.getGraphics();
-
 		}
 		offGraphics.setColor(getBackground());
 		offGraphics.fillRect(0, 0, Boids.fieldWidth, Boids.fieldHeight);
 		offGraphics.setColor(Color.BLACK);
 		offGraphics.drawRect(0, 0, Boids.fieldWidth, Boids.fieldHeight);		
+
+		offGraphics.setColor(Color.WHITE);
+		offGraphics.fillRect(Boids.posRectWidth, Boids.posRectHeight, Boids.rectWidth, Boids.rectHeight);
+		offGraphics.setColor(Color.BLACK);
+		offGraphics.drawRect(Boids.posRectWidth, Boids.posRectHeight, Boids.rectWidth, Boids.rectHeight);		
+
 		creatures.draw(offGraphics);
 		g.drawImage(offImage, 0, 0, null);
-
-
 	}
 
 	public void run() {

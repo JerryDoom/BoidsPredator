@@ -7,6 +7,8 @@ public class Creature {
 	protected double xSpeed, ySpeed;
 	double slowDown = 0.05;	
     double[][] oldPositions = new double[2][10];
+    private boolean captured = false;
+    private boolean capturable = false;
 
 
 	public int getWidth() {
@@ -55,8 +57,24 @@ public class Creature {
 		
 		setX(getX() + xSpeed);
 
-        if (getX() < this.width && x < oldX) {
- 	
+		if(isCapturable() && !isCaptured() && getX() > Boids.posRectWidth && getX() < Boids.posRectWidth + Boids.rectWidth
+				&& getY() > Boids.posRectHeight && getY() < Boids.posRectHeight + Boids.rectHeight) {
+			this.setCaptured(true);
+			setX(Boids.rectWidth);
+            xSpeed = xSpeed+5;
+		} else if(isCaptured() && (getX() < Boids.posRectWidth)) {
+			setX(Boids.posRectWidth);
+            xSpeed = xSpeed -5;
+		} else if(isCaptured() && (getX() > Boids.posRectWidth + Boids.rectWidth)) {
+			setX(Boids.posRectWidth + Boids.rectWidth);
+            xSpeed = xSpeed -5;
+		} else if(isCaptured() && (getY() < Boids.posRectHeight)) {
+			setY(Boids.posRectHeight);
+            ySpeed = ySpeed -5;
+		} else if(isCaptured() && (getY() > Boids.posRectHeight + Boids.rectHeight)) {
+			setY(Boids.posRectHeight + Boids.rectHeight);
+            ySpeed = ySpeed -5;
+		} else if (getX() < this.width && x < oldX) { 	
             setX(this.width);
             xSpeed = xSpeed+5;
         } else if (getX() > Boids.fieldWidth - this.width && x > oldX) {
@@ -148,5 +166,21 @@ public class Creature {
 	public String toString() {
 		return ("c: "+ color+" x:" + x+" y:" + y+" xspeed:" + xSpeed+" yspeed:" + ySpeed);
 	
+	}
+
+	boolean isCapturable() {
+		return capturable;
+	}
+
+	void setCapturable(boolean capturable) {
+		this.capturable = capturable;
+	}
+
+	boolean isCaptured() {
+		return captured;
+	}
+
+	void setCaptured(boolean captured) {
+		this.captured = captured;
 	}
 }
