@@ -10,7 +10,9 @@ public class Creature {
     private boolean captured = false;
     private boolean capturable = false;
     private int trappedHeight;
-
+    static int cage1 = 0;
+    static int cage2 =0;
+    static int cage3 =0;
 
 	public int getWidth() {
 		return this.width;
@@ -62,10 +64,16 @@ public class Creature {
 			this.setCaptured(true);
 			
 			if (getY() >= 0 && getY() < Boids.posRectHeight) {
+				cage1++;
+				System.out.println("Predador1 has " + cage1 + " captured boids");
 				trappedHeight = Boids.posRectHeight;
 			}else if (getY() >= Boids.posRectHeight && getY() < 2 * Boids.posRectHeight) {
+				cage2++;
+				System.out.println("Predador2 has " + cage2 + " captured boids");
 				trappedHeight = 2 * Boids.posRectHeight;
 			} else {
+				cage3++;
+				System.out.println("Predador3 has " + cage3 + " captured boids");
 				trappedHeight = Boids.fieldHeight;
 			}				
 			setX(Boids.rectWidth);
