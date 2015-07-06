@@ -9,6 +9,7 @@ public class Creature {
     double[][] oldPositions = new double[2][10];
     private boolean captured = false;
     private boolean capturable = false;
+    private int trappedHeight;
 
 
 	public int getWidth() {
@@ -57,31 +58,46 @@ public class Creature {
 		
 		setX(getX() + xSpeed);
 
-		if(isCapturable() && !isCaptured() && getX() > Boids.posRectWidth && getX() < Boids.fieldWidth
-				&& getY() > Boids.posRectHeight && getY() < 2 * Boids.posRectHeight) {
+		if(isCapturable() && !isCaptured() && getX() > Boids.posRectWidth && getX() < Boids.fieldWidth) {
 			this.setCaptured(true);
+			
+			if (getY() > 0 && getY() <= Boids.posRectHeight) {
+				trappedHeight = Boids.posRectHeight;
+			}else if (getY() > Boids.posRectHeight && getY() <= 2 * Boids.posRectHeight) {
+				trappedHeight = 2 * Boids.posRectHeight;
+			} else {
+				trappedHeight = Boids.fieldHeight;
+			}				
 			setX(Boids.rectWidth);
+			setY(trappedHeight);
             xSpeed = xSpeed+5;
-		} else if(isCaptured() && (getX() <= Boids.posRectWidth)) {
+		} 
+		
+		if(isCaptured() && (getX() <= Boids.posRectWidth)) {
 			setX(Boids.posRectWidth+5);
             xSpeed = xSpeed + 5;
 		} else if(isCaptured() && (getX() > Boids.fieldWidth)) {
 			setX(Boids.fieldWidth-5);
             xSpeed = xSpeed -5;
-		} else if(isCaptured() && (getY() < Boids.posRectHeight)) {
-			setY(Boids.posRectHeight+5);
-            ySpeed = ySpeed + 5;
-		} else if(isCaptured() && (getY() > 2 * Boids.posRectHeight)) {
-			setY((2 * Boids.posRectHeight)-5);
-            ySpeed = ySpeed -5;
-		} else if (getX() < this.width && x < oldX) { 	
+		} else
+		
+		if(isCaptured() && (getY() < trappedHeight - Boids.posRectHeight) && getY() >= trappedHeight) {
+			if (getY() >=trappedHeight) {
+				setY(trappedHeight-5);
+            	ySpeed = ySpeed - 5;
+			} else {
+				setY(trappedHeight - Boids.posRectHeight+5);
+            	ySpeed = ySpeed + 5;
+			}
+		} else
+		
+		if (getX() < this.width && x < oldX) { 	
             setX(this.width);
             xSpeed = xSpeed+5;
         } else if (getX() > Boids.fieldWidth - this.width && x > oldX) {
             setX(Boids.fieldWidth - this.width);
             xSpeed = xSpeed -5;
         }
-      
         
 		setY(getY() + ySpeed);
         if (getY() < this.height && y < oldY) {
