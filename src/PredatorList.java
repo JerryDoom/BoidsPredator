@@ -57,7 +57,7 @@ public class PredatorList extends CreatureList {
 		Predator predator;
 		for (int i = 0; i< this.size(); i++) {
 			predator = (Predator)this.get(i);
-			if (predator.isFollowing()) {
+			if (predator.isFollowing()) {				
 				predator.decStamina(1);
 				Boid boid = predator.calcSpeedTarget();
 				if (boid!= null) {

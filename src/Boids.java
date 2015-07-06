@@ -61,8 +61,10 @@ public class Boids extends Applet {
 	static double maxPSpeed = 2.5;
 
 	static int delay = 40;	
+	static Color predatorColor[] = {Color.YELLOW, Color.RED,Color.BLUE};
 	
     public void init() {
+    	int predatorRange=Boids.posRectHeight;
         setBackground(Color.white);
         setForeground(Color.black);
 
@@ -75,7 +77,10 @@ public class Boids extends Applet {
 
         for (int i = 0; i < numOfPredators; i++) {
             Predator predator = makePredator();
+            predator.setTrappedHeight(predatorRange);
+            predator.setColor(predatorColor[i]);
             creatures.addPredator(predator);
+            predatorRange += predatorRange;          
 
         }        
 
