@@ -115,7 +115,10 @@ public class Predator extends Boid {
         double diffX = target.getX() - getX();
         double diffY = target.getY() - getY();
         double from = Math.sqrt(Math.pow(diffX,2) +Math.pow(diffY,2));
-        if (from < Boids.catchDistance) {
+        
+        if(target != null && target.isCapturable() && target.getX() >= 5* Boids.rectWidth && target.getY() > this.getTrappedHeight())
+        	return target;
+        if ((!target.isCapturable() && from < Boids.catchDistance) || (target.isCapturable() && target.isCaptured()) ) {
         	return target;
         }
         double ratio = Math.abs(diffX) / Math.abs(diffY);

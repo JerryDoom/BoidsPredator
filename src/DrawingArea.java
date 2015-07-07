@@ -24,10 +24,20 @@ public class DrawingArea extends Panel implements Runnable {
 		offGraphics.setColor(Color.BLACK);
 		offGraphics.drawRect(0, 0, Boids.fieldWidth, Boids.fieldHeight);		
 
-		offGraphics.setColor(Color.WHITE);
+		offGraphics.setColor(Boids.predatorColor[0]);
+		offGraphics.fillRect(Boids.posRectWidth, 0, Boids.rectWidth, Boids.posRectHeight);
+		offGraphics.setColor(Color.BLACK);
+		offGraphics.drawRect(Boids.posRectWidth, 0, Boids.rectWidth, Boids.posRectHeight);		
+
+		offGraphics.setColor(Boids.predatorColor[1]);
 		offGraphics.fillRect(Boids.posRectWidth, Boids.posRectHeight, Boids.rectWidth, Boids.rectHeight);
 		offGraphics.setColor(Color.BLACK);
 		offGraphics.drawRect(Boids.posRectWidth, Boids.posRectHeight, Boids.rectWidth, Boids.rectHeight);		
+
+		offGraphics.setColor(Boids.predatorColor[2]);
+		offGraphics.fillRect(Boids.posRectWidth, 2*Boids.posRectHeight , Boids.rectWidth, Boids.rectHeight);
+		offGraphics.setColor(Color.BLACK);
+		offGraphics.drawRect(Boids.posRectWidth, 2*Boids.posRectHeight, Boids.rectWidth, Boids.rectHeight);		
 
 		creatures.draw(offGraphics);
 		g.drawImage(offImage, 0, 0, null);

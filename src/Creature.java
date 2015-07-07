@@ -9,7 +9,10 @@ public class Creature {
     double[][] oldPositions = new double[2][10];
     private boolean captured = false;
     private boolean capturable = false;
-
+    private int trappedHeight;
+    static int cage1 = 0;
+    static int cage2 =0;
+    static int cage3 =0;
 
 	public int getWidth() {
 		return this.width;
@@ -57,31 +60,53 @@ public class Creature {
 		
 		setX(getX() + xSpeed);
 
-		if(isCapturable() && !isCaptured() && getX() > Boids.posRectWidth && getX() < Boids.posRectWidth + Boids.rectWidth
-				&& getY() > Boids.posRectHeight && getY() < Boids.posRectHeight + Boids.rectHeight) {
+		if(isCapturable() && !isCaptured() && getX() > Boids.posRectWidth && getX() < Boids.fieldWidth) {
 			this.setCaptured(true);
+			
+			if (getY() >= 0 && getY() < Boids.posRectHeight) {
+				cage1++;
+				System.out.println("Predador1 has " + cage1 + " captured boids");
+				setTrappedHeight(Boids.posRectHeight);
+			}else if (getY() >= Boids.posRectHeight && getY() < 2 * Boids.posRectHeight) {
+				cage2++;
+				System.out.println("Predador2 has " + cage2 + " captured boids");
+				setTrappedHeight(2 * Boids.posRectHeight);
+			} else {
+				cage3++;
+				System.out.println("Predador3 has " + cage3 + " captured boids");
+				setTrappedHeight(Boids.fieldHeight);
+			}				
 			setX(Boids.rectWidth);
+//			setY(trappedHeight);
             xSpeed = xSpeed+5;
-		} else if(isCaptured() && (getX() < Boids.posRectWidth)) {
-			setX(Boids.posRectWidth);
+		} 
+		
+		if(isCaptured() && (getX() <= Boids.posRectWidth)) {
+			setX(Boids.posRectWidth+5);
+            xSpeed = xSpeed + 5;
+		} else if(isCaptured() && (getX() > Boids.fieldWidth)) {
+			setX(Boids.fieldWidth-5);
             xSpeed = xSpeed -5;
-		} else if(isCaptured() && (getX() > Boids.posRectWidth + Boids.rectWidth)) {
-			setX(Boids.posRectWidth + Boids.rectWidth);
-            xSpeed = xSpeed -5;
-		} else if(isCaptured() && (getY() < Boids.posRectHeight)) {
-			setY(Boids.posRectHeight);
-            ySpeed = ySpeed -5;
-		} else if(isCaptured() && (getY() > Boids.posRectHeight + Boids.rectHeight)) {
-			setY(Boids.posRectHeight + Boids.rectHeight);
-            ySpeed = ySpeed -5;
-		} else if (getX() < this.width && x < oldX) { 	
+		}
+		
+		if(isCaptured() && ((getY() <= getTrappedHeight() - Boids.posRectHeight) || getY() > getTrappedHeight())) {
+			
+			if (getY() >getTrappedHeight()) {
+				setY(getTrappedHeight()-5);
+            	ySpeed = ySpeed - 5;
+			} else {
+				setY(getTrappedHeight() - Boids.posRectHeight+5);
+            	ySpeed = ySpeed+ 5;
+			}
+		} else
+		
+		if (getX() < this.width && x < oldX) { 	
             setX(this.width);
             xSpeed = xSpeed+5;
         } else if (getX() > Boids.fieldWidth - this.width && x > oldX) {
             setX(Boids.fieldWidth - this.width);
             xSpeed = xSpeed -5;
         }
-      
         
 		setY(getY() + ySpeed);
         if (getY() < this.height && y < oldY) {
@@ -182,5 +207,13 @@ public class Creature {
 
 	void setCaptured(boolean captured) {
 		this.captured = captured;
+	}
+
+	public int getTrappedHeight() {
+		return trappedHeight;
+	}
+
+	public void setTrappedHeight(int trappedHeight) {
+		this.trappedHeight = trappedHeight;
 	}
 }
