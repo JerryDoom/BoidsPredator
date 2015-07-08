@@ -80,11 +80,11 @@ public class PredatorList extends CreatureList {
 				} else {
 					predator.calcSpeed(p);
 					predator.updateSpeedRepel(repeller(predator));					
-					predator.updateBoundPosition();
+					predator.updateBoundContainerPosition();
 					predator.boundSpeed();
 				}
 			}
-			predator.updatePosition();
+			predator.updateContainerPosition();
 			predator.draw(g);
 		}
 		

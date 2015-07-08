@@ -123,6 +123,43 @@ public class Creature {
 		ySpeed -= ySpeed/Math.abs(ySpeed) * getSlowDown();
 	}
 	
+	public void updateContainerPosition() {
+		for (int i = 0; i < 4; i++) {
+			oldPositions[0][i] = oldPositions[0][i+1];
+			oldPositions[1][i] = oldPositions[1][i+1];
+		}
+		oldPositions[0][4] = x;
+		oldPositions[1][4] = y;
+		double oldX = x;
+		double oldY = y;
+		
+		setX(getX() + xSpeed);
+
+        if (getX() < this.width && x < oldX) {
+ 	
+            setX(this.width);
+            xSpeed = xSpeed+5;
+        } else if (getX() > (Boids.fieldWidth-Boids.rectWidth) - this.width && x > oldX) {
+            setX((Boids.fieldWidth-Boids.rectWidth) - this.width);
+            xSpeed = xSpeed -5;
+        }
+      
+        
+		setY(getY() + ySpeed);
+        if (getY() < this.height && y < oldY) {
+            setY(this.height);
+            ySpeed = ySpeed +5;
+        } else if (getY() > Boids.fieldHeight - this.height && y > oldY) {
+            setY(Boids.fieldHeight - this.height);
+            ySpeed = ySpeed - 5;
+        }
+        
+      
+        
+        xSpeed -= xSpeed/Math.abs(xSpeed) * getSlowDown();
+		ySpeed -= ySpeed/Math.abs(ySpeed) * getSlowDown();
+	}
+	
 	/**
 	 * @return
 	 */
@@ -185,6 +222,36 @@ public class Creature {
 				div=.01;			
 			ySpeed += Math.abs(2*getMaxSpeed() / div);
 		}
+
+	}
+	
+	public void updateBoundContainerPosition() {
+		if (getX() > (Boids.fieldWidth-Boids.rectWidth) - 20*getMaxSpeed()) {
+			double div = getX() - (Boids.fieldWidth-Boids.rectWidth);
+			if (div==0) 
+				div=.01;
+			xSpeed += -Math.abs(2*getMaxSpeed() / div);
+		}
+		/*if (getY() > Boids.fieldHeight - 20*getMaxSpeed()) {
+			double div = (getY() - Boids.fieldHeight);
+			if (div==0) 
+				div=.01;
+			ySpeed += -Math.abs(2*getMaxSpeed() / div);
+		}*/
+
+		if (getX() < 20*getMaxSpeed()) {
+			double div = getX();
+			if (div==0) 
+				div=.01;
+			xSpeed +=  Math.abs(2*getMaxSpeed()/ div);
+		}
+
+		/*if (getY() < 20*getMaxSpeed()) {
+			double div = getY();
+			if (div==0) 
+				div=.01;			
+			ySpeed += Math.abs(2*getMaxSpeed() / div);
+		}*/
 
 	}
 	
