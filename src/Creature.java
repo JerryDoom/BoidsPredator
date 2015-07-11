@@ -82,8 +82,25 @@ public class Creature {
 		} 
 		
 		if(isCaptured() && (getX() <= Boids.posRectWidth)) {
-			setX(Boids.posRectWidth+5);
-            xSpeed = xSpeed + 5;
+			if((getY() <= (getTrappedHeight() - Boids.posRectHeight) + Boids.heightScapeSize)) {
+				setCaptured(false);
+				setX(Boids.posRectWidth-5);
+	            xSpeed = xSpeed -5;
+	            
+	            if(getTrappedHeight() == Boids.posRectHeight) {
+	            	cage1--;
+	            	System.out.println("Predador1 has " + cage1 + " captured boids");
+	            } else if(getTrappedHeight() == 2 * Boids.posRectHeight) {
+	            	cage2--;
+	            	System.out.println("Predador2 has " + cage2 + " captured boids");
+	            } else {
+	            	cage3--;
+	            	System.out.println("Predador3 has " + cage3 + " captured boids");
+	            }
+			} else {
+				setX(Boids.posRectWidth+5);
+            	xSpeed = xSpeed + 5;				
+			}
 		} else if(isCaptured() && (getX() > Boids.fieldWidth)) {
 			setX(Boids.fieldWidth-5);
             xSpeed = xSpeed -5;

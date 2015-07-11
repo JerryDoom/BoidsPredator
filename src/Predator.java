@@ -116,7 +116,7 @@ public class Predator extends Boid {
         double diffY = target.getY() - getY();
         double from = Math.sqrt(Math.pow(diffX,2) +Math.pow(diffY,2));
         
-        if(target != null && target.isCapturable() && target.getX() >= 5* Boids.rectWidth && target.getY() > this.getTrappedHeight())
+        if(target != null && target.isCapturable() && (getY() <= getTrappedHeight() - Boids.posRectHeight) || getY() > getTrappedHeight())
         	return target;
         if ((!target.isCapturable() && from < Boids.catchDistance) || (target.isCapturable() && target.isCaptured()) ) {
         	return target;
